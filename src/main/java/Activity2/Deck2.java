@@ -12,7 +12,7 @@ public class Deck2 {
 	/**
 	 * cards contains all the cards in the deck.
 	 */
-	private List<Card2> cards;
+	private List<Card2> cards = new ArrayList<Card2>();
 
 	/**
 	 * size is the number of not-yet-dealt cards.
@@ -32,6 +32,13 @@ public class Deck2 {
 	 */
 	public Deck2(String[] ranks, String[] suits, int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		for(String suit : suits) {
+			for(int i = 0; i < ranks.length; i++) {
+				Card2 card = new Card2(ranks[i], suit, values[i]);
+				cards.add(card);
+				size++;
+			}
+		}
 	}
 
 
@@ -41,7 +48,7 @@ public class Deck2 {
 	 */
 	public boolean isEmpty() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		return true;
+		return (size == 0);
 	}
 
 	/**
@@ -50,7 +57,7 @@ public class Deck2 {
 	 */
 	public int size() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		return -1;
+		return size;
 	}
 
 	/**
@@ -68,7 +75,12 @@ public class Deck2 {
 	 */
 	public Card2 deal() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		return new Card2("","",-1);
+		if(this.isEmpty()) {
+			return null;
+		}
+		else{
+			return cards.remove(0);
+		}
 	}
 
 	/**

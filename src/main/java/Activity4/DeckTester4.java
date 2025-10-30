@@ -1,4 +1,7 @@
 package Activity4;
+
+import Activity2.Deck2;
+
 /**
  * This is a class that tests the Deck class.
  */
@@ -53,5 +56,14 @@ public class DeckTester4 {
 		System.out.println();
 
 		/* *** TO BE COMPLETED IN ACTIVITY 4 *** */
+		int[] pointValues1 = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13};
+		String[] ranks1 = new String[] {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
+		String[] suits1 = new String[] {"Spades","Hearts","Diamonds","Clubs"};
+		Deck4 d1 = new Deck4(ranks1, suits1, pointValues1);
+		
+		System.out.println(d1.toString());
+		d1.shuffle();
+		System.out.println(d1.toString());
+		
 	}
 }

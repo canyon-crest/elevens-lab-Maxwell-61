@@ -1,4 +1,7 @@
 package Activity3;
+
+import java.util.Arrays;
+
 /**
  * This class provides a convenient way to test shuffling methods.
  */
@@ -52,6 +55,24 @@ public class Shuffler3 {
 	 */
 	public static void perfectShuffle(int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		int middle = values.length/2;
+		int[] left = new int[middle];
+		int[] right = new int[values.length - middle];
+		
+		for(int i=0; i<middle; i++) {
+			left[i] = right[i];
+		}
+		for(int i=0; i<(values.length - middle); i++) {
+			right[i] = values[middle + i];
+		}
+		
+		for(int i=0, j=0; i<values.length; i += 2, j++) {
+			values[i] = left[j];
+		}
+		for(int i=1, j=0; i<values.length; i += 2, j++) {
+			values[i] = right[j];
+		}
+		
 	}
 
 	/**
@@ -67,5 +88,42 @@ public class Shuffler3 {
 	 */
 	public static void selectionShuffle(int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		for(int i = 0; i<values.length; i++) {
+			int random = (int) (Math.random() * values.length);
+			int temp = values[i];
+			values[i] = values[random];
+			values[random] = values[temp];
+		}
+	}
+	
+	public static String flip() {
+		int random = (int) (Math.random() * 3);
+		if(random == 0) {
+			return "tails";
+		}
+		else {
+			return "heads";
+		}
+	}
+	
+	public static boolean arePermutations(Object[] obj1, Object[] obj2) {
+		if(obj1.length != obj2.length){
+			return false;
+		}
+		
+		Arrays.sort(obj1);
+		Arrays.sort(obj2);
+		
+		for(int i=0; i<obj1.length; i++) {
+			if(obj1[i].equals(obj2[i])) {
+				continue;
+			}
+			else {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 }
+
