@@ -55,6 +55,12 @@ public class ElevensBoard9 extends Board9 {
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		if(selectedCards.size() == 2 && containsPairSum11(selectedCards)) {
+			return true;
+		}
+		if(selectedCards.size() == 3 && containsJQK(selectedCards)) {
+			return true;
+		}
 		return false;
 	}
 
@@ -69,6 +75,13 @@ public class ElevensBoard9 extends Board9 {
 	@Override
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for(int i=0; i < this.size(); i++) {
+			list.add(i);
+		}
+		if(containsPairSum11(list) || containsJQK(list)) {
+			return true;
+		}
 		return false;
 	}
 
@@ -82,6 +95,15 @@ public class ElevensBoard9 extends Board9 {
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		for(int i=0; i < selectedCards.size(); i++) {
+			for(int j=0; j<selectedCards.size(); j++) {
+				if(j != i) {
+					if(this.cardAt(selectedCards.get(i)).pointValue() + this.cardAt(selectedCards.get(j)).pointValue() == 11) {
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 
@@ -95,6 +117,31 @@ public class ElevensBoard9 extends Board9 {
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		for(int i=0; i<selectedCards.size(); i++) {
+			for(int j=0; i<selectedCards.size(); j++) {
+				for(int k=0; k<selectedCards.size(); k++) {
+					if(i != j && i != k && j != k) {
+						if(this.cardAt(selectedCards.get(i)).pointValue() + this.cardAt(selectedCards.get(j)).pointValue() + this.cardAt(selectedCards.get(k)).pointValue() == 0) {
+							int J = 0;
+							int Q = 0;
+							int K = 0;
+							if(this.cardAt(selectedCards.get(i)).rank() == "jack") {
+								J++;
+							}
+							if(this.cardAt(selectedCards.get(i)).rank() == "queen") {
+								Q++;
+							}
+							if(this.cardAt(selectedCards.get(i)).rank() == "king") {
+								K++;
+							}
+							if(J == 1 && Q == 1 && K == 1) {
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
 		return false;
 	}
 }
