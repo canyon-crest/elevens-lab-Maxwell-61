@@ -53,27 +53,28 @@ public class Shuffler3 {
 	 * the cards in one half with the cards in the other.
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
-	public static void perfectShuffle(int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
-		int middle = values.length/2;
-		int[] left = new int[middle];
-		int[] right = new int[values.length - middle];
-		
-		for(int i=0; i<middle; i++) {
-			left[i] = right[i];
-		}
-		for(int i=0; i<(values.length - middle); i++) {
-			right[i] = values[middle + i];
-		}
-		
-		for(int i=0, j=0; i<values.length; i += 2, j++) {
-			values[i] = left[j];
-		}
-		for(int i=1, j=0; i<values.length; i += 2, j++) {
-			values[i] = right[j];
-		}
-		
-	}
+	 public static void perfectShuffle(int[] values) {
+		  int[] temp = new int[values.length];
+		  int mid = (values.length + 1) / 2;
+
+		  // Interleave elements 0 ... mid-1 with elements mid ... length-1
+		  int unshuffledPos = 0;
+		  int k = 0;
+		  for ( ; k < mid; k++) {
+		   temp[unshuffledPos] = values[k];
+		   unshuffledPos += 2;
+		  }
+		  unshuffledPos = 1;
+		  for ( ; k < values.length; k++) {
+		   temp[unshuffledPos] = values[k];
+		   unshuffledPos += 2;
+		  }
+
+		  // Copy elements back to values
+		  for (k = 0; k < values.length; k++) {
+		   values[k] = temp[k];
+		  }
+		 }
 
 	/**
 	 * Apply an "efficient selection shuffle" to the argument.

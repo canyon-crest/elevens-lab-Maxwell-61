@@ -108,28 +108,26 @@ public class ElevensBoard11 extends Board11 {
 		boolean foundJack = false;
 		boolean foundQueen = false;
 		boolean foundKing = false;
-		int jackAt = -1;
-		int queenAt = -1;
-		int kingAt = -1;
+		int j = 0;
+		int q = 0;
+		int ki = 0;
 		for (Integer kObj : selectedCards) {
 			int k = kObj.intValue();
 			if (cardAt(k).rank().equals("jack")) {
 				foundJack = true;
-				jackAt = k;
+				j = k;
 			} else if (cardAt(k).rank().equals("queen")) {
 				foundQueen = true;
-				queenAt = k;
+				q = k;
 			} else if (cardAt(k).rank().equals("king")) {
 				foundKing = true;
-				kingAt = k;
+				ki = k;
 			}
 		}
 		if(foundJack && foundQueen && foundKing) {
-			return new int[] {jackAt, queenAt, kingAt};
+			return new int[] {j, q, ki};
 		}
-		else {
-			return new int[] {};
-		}
+		return new int[] {};
 	}
 
 	/**
@@ -137,10 +135,14 @@ public class ElevensBoard11 extends Board11 {
 	 * @return true if a legal play was found (and made); false othewise.
 	 */
 	public boolean playIfPossible() {
-		List<Integer> cIndexes = cardIndexes();
-		boolean left = (findPairSum11(cIndexes).length != 0);
-		boolean right = (findJQK(cIndexes).length != 0);
-		return  right || left ;
+		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
+		if(playPairSum11IfPossible()) {
+			return true;
+		}
+		if(playJQKIfPossible()) {
+			return true;
+		}
+		return false; 
 	}
 
 	/**
@@ -151,7 +153,21 @@ public class ElevensBoard11 extends Board11 {
 	 */
 	private boolean playPairSum11IfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		 return false; // REPLACE !
+		List<Integer> cIndexes = cardIndexes();
+		 if(findPairSum11(cIndexes).length != 0) {
+			 int[] cord = findPairSum11(cIndexes);
+			 ArrayList<Integer> list = new ArrayList<Integer>();
+			 
+			 for(int i : cord) {
+				 list.add(i);
+			 }
+			 
+			 replaceSelectedCards(list);
+			 return true;
+		 }
+		 else {
+			 return false;
+		 }
 	}
 
 	/**
@@ -162,6 +178,20 @@ public class ElevensBoard11 extends Board11 {
 	 */
 	private boolean playJQKIfPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 11 *** */
-		return false; // REPLACE !
+		List<Integer> cIndexes = cardIndexes();
+		 if(findJQK(cIndexes).length != 0) {
+			 int[] cord = findJQK(cIndexes);
+			 ArrayList<Integer> list = new ArrayList<Integer>();
+			 
+			 for(int i : cord) {
+				 list.add(i);
+			 }
+			 
+			 replaceSelectedCards(list);
+			 return true;
+		 }
+		 else {
+			 return false;
+		 }
 	}
 }
