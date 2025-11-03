@@ -93,7 +93,7 @@ public class Shuffler3 {
 			int random = (int) (Math.random() * values.length);
 			int temp = values[i];
 			values[i] = values[random];
-			values[random] = values[temp];
+			values[random] = temp;
 		}
 	}
 	
