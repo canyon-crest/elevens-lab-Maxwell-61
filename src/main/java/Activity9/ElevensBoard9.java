@@ -58,10 +58,12 @@ public class ElevensBoard9 extends Board9 {
 		if(selectedCards.size() == 2 && containsPairSum11(selectedCards)) {
 			return true;
 		}
-		if(selectedCards.size() == 3 && containsJQK(selectedCards)) {
+		else if(selectedCards.size() == 3 && containsJQK(selectedCards)) {
 			return true;
 		}
-		return false;
+		else{
+			return false;
+		}
 	}
 
 	/**
@@ -75,11 +77,10 @@ public class ElevensBoard9 extends Board9 {
 	@Override
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		for(int i=0; i < this.size(); i++) {
-			list.add(i);
+		if(containsPairSum11(this.cardIndexes())) {
+			return true;
 		}
-		if(containsPairSum11(list) || containsJQK(list)) {
+		if(containsJQK(this.cardIndexes())) {
 			return true;
 		}
 		return false;
@@ -96,11 +97,11 @@ public class ElevensBoard9 extends Board9 {
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
 		for(int i=0; i < selectedCards.size(); i++) {
-			for(int j=0; j<selectedCards.size(); j++) {
-				if(j != i) {
-					if(this.cardAt(selectedCards.get(i)).pointValue() + this.cardAt(selectedCards.get(j)).pointValue() == 11) {
-						return true;
-					}
+			int ik = this.cardAt(selectedCards.get(i)).pointValue();
+			for(int j=i+1; j<selectedCards.size(); j++) {
+				int jk = this.cardAt(selectedCards.get(j)).pointValue();
+				if(ik + jk == 11) {
+					return true;
 				}
 			}
 		}
@@ -117,31 +118,21 @@ public class ElevensBoard9 extends Board9 {
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-		for(int i=0; i<selectedCards.size(); i++) {
-			for(int j=0; i<selectedCards.size(); j++) {
-				for(int k=0; k<selectedCards.size(); k++) {
-					if(i != j && i != k && j != k) {
-						if(this.cardAt(selectedCards.get(i)).pointValue() + this.cardAt(selectedCards.get(j)).pointValue() + this.cardAt(selectedCards.get(k)).pointValue() == 0) {
-							int J = 0;
-							int Q = 0;
-							int K = 0;
-							if(this.cardAt(selectedCards.get(i)).rank() == "jack") {
-								J++;
-							}
-							if(this.cardAt(selectedCards.get(i)).rank() == "queen") {
-								Q++;
-							}
-							if(this.cardAt(selectedCards.get(i)).rank() == "king") {
-								K++;
-							}
-							if(J == 1 && Q == 1 && K == 1) {
-								return true;
-							}
-						}
-					}
-				}
+		boolean King = false;
+		boolean Queen = false;
+		boolean Jack = false;
+		for(Integer i : selectedCards) {
+			if(this.cardAt(i).rank().equals("jack")) {
+				Jack = true;
+			}
+			if(this.cardAt(i).rank().equals("queen")) {
+				Queen = true;
+			}
+			if(this.cardAt(i).rank().equals("king")) {
+				King = true;
 			}
 		}
-		return false;
+		
+		return King && Queen && Jack;
 	}
 }
