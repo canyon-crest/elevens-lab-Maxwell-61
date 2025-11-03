@@ -1,6 +1,7 @@
 package Activity2;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The Deck class represents a shuffled deck of cards.
@@ -12,14 +13,14 @@ public class Deck2 {
 	/**
 	 * cards contains all the cards in the deck.
 	 */
-	private List<Card2> cards;
+	private List<Card2> cards = new ArrayList<Card2>(Arrays.asList(new Card2("ace", "hearts", 1), new Card2("2", "hearts", 2), new Card2("3", "hearts", 3), new Card2("ace", "spades", 1), new Card2("2", "spades", 2), new Card2("3", "spades", 3)));
 
 	/**
 	 * size is the number of not-yet-dealt cards.
 	 * Cards are dealt from the top (highest index) down.
 	 * The next card to be dealt is at size - 1.
 	 */
-	private int size;
+	private int size = cards.size();
 
 
 	/**
@@ -31,17 +32,8 @@ public class Deck2 {
 	 * @param values is an array containing all of the card point values.
 	 */
 	public Deck2(String[] ranks, String[] suits, int[] values) {
-		cards = new ArrayList<Card2>();
-		cards.add(new Card2("ace", "hearts", 1));
-		cards.add(new Card2("2", "hearts", 2));
-		cards.add(new Card2("3", "hearts", 3));
-		cards.add(new Card2("ace", "spades", 1));
-		cards.add(new Card2("2", "spades", 2));
-		cards.add(new Card2("3", "spades", 3));
-		
 		size = cards.size();
 		System.out.println(size);
-		shuffle();
 	}
 
 
@@ -67,7 +59,7 @@ public class Deck2 {
 	 */
 	public void shuffle() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
-		this.size = 0; // remove me
+		// remove me
 	}
 
 	/**
