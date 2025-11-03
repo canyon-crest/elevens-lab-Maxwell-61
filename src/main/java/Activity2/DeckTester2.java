@@ -13,7 +13,7 @@ public class DeckTester2 {
 		int[] pointValues = new int[] {1, 2, 3};
 		String[] ranks = new String[] {"ace", "2", "3"};
 		String[] suits = new String[] {"hearts", "spades"};
-		Deck2 d1 = new Deck2(ranks, suits, pointValues); 
+		Deck2 d1 = new Deck2(ranks, suits, pointValues);
 		
 //		int[] pointValues = new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13};
 //		String[] ranks = new String[] {"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
