@@ -38,6 +38,7 @@ public class Deck2 {
 			}
 		}
 		size = cards.size();
+		System.out.println(size);
 		shuffle();
 	}
 
